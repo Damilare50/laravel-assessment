@@ -1,6 +1,7 @@
 <?php
 
     use App\Http\Controllers\AccountController;
+    use App\Http\Controllers\CategoryController;
     use App\Http\Controllers\ProductController;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
@@ -33,10 +34,15 @@
         Route::post('/logout', [AccountController::class, 'logout'])->middleware('jwt.auth'); // logout
     });
 
-    Route::middleware('jwt.auth')->prefix('/product')->group(function () {
+    Route::prefix('/product')->middleware('jwt.auth')->group(function () {
         Route::get('/', [ProductController::class, 'list'])->withoutMiddleware('jwt.auth');
         Route::post('/', [ProductController::class, 'create']);
         Route::put('/{id}', [ProductController::class, 'update']);
         Route::delete('/{id}', [ProductController::class, 'delete']);
         Route::get('/{id}', [ProductController::class, 'fetchOne']);
+    });
+
+    Route::prefix('/category')->middleware('jwt.auth')->group(function () {
+        Route::get('', [CategoryController::class, 'list']);
+        Route::post('', [CategoryController::class, 'create']);
     });

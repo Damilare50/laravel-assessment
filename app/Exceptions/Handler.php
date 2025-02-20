@@ -31,7 +31,7 @@
                     'success' => false,
                     'message' => $e->getMessage(),
                     'data' => null,
-                ], $e->getStatusCode() ?? 500);
+                ], 500);
             });
         }
     }
