@@ -9,7 +9,7 @@
     {
         public function __construct(protected CategoryRepository $categoryRepository) {}
 
-        public function create(array $data, int $account_id)
+        public function create(array $data, int $account_id): JsonResponse
         {
             $_category = $this->categoryRepository->findByName($data['name'], $account_id);
             if ($_category) {
@@ -23,7 +23,7 @@
             return response()->json([
                 'success' => true,
                 'message' => 'category created',
-                'data' => $this->categoryRepository->create($data)
+                'data' => $this->categoryRepository->create(array_merge($data, ['account_id' => $account_id])),
             ]);
         }
 
