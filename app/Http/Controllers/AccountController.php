@@ -2,8 +2,8 @@
 
     namespace App\Http\Controllers;
 
-    use App\Http\Requests\Account\LoginRequest;
-    use App\Http\Requests\Account\RegisterRequest;
+    use App\Http\Requests\Account\Login;
+    use App\Http\Requests\Account\Register;
     use App\Services\AccountService;
     use Illuminate\Http\JsonResponse;
 
@@ -11,7 +11,7 @@
     {
         public function __construct(protected AccountService $accountService) {}
 
-        public function register(RegisterRequest $request): JsonResponse
+        public function register(Register $request): JsonResponse
         {
             $validated = $request->validated();
 
@@ -24,7 +24,7 @@
             ]);
         }
 
-        public function login(LoginRequest $request): JsonResponse
+        public function login(Login $request): JsonResponse
         {
             $credentials = $request->only('email', 'password');
 
