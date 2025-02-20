@@ -24,8 +24,6 @@
                 $query->where('price', '<=', $filters['max_price']);
             }
 
-            $query->where('account_id', $filters['account_id']);
-
             return $query->paginate($limit);
         }
 

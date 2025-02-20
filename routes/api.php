@@ -34,7 +34,7 @@
     });
 
     Route::middleware('jwt.auth')->prefix('/product')->group(function () {
-        Route::get('/', [ProductController::class, 'list']);
+        Route::get('/', [ProductController::class, 'list'])->withoutMiddleware('jwt.auth');
         Route::post('/', [ProductController::class, 'create']);
         Route::put('/{id}', [ProductController::class, 'update']);
         Route::delete('/{id}', [ProductController::class, 'delete']);

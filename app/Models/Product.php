@@ -25,4 +25,9 @@
         {
             return $this->belongsTo(Category::class);
         }
+
+        public function account(): BelongsTo
+        {
+            return $this->belongsTo(Account::class);
+        }
     }
